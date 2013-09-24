@@ -5,7 +5,7 @@
     Asteroids.MovingObject.call(this, pos, vel, Asteroid.RADIUS, Asteroid.COLOR);
   };
 
-  Asteroid.COLOR = "grey";
+  Asteroid.COLOR = "red";
   Asteroid.RADIUS = 25;
 
   Asteroid.inherits(Asteroids.MovingObject);
@@ -14,7 +14,6 @@
     var randX = Math.random() * dimX
     var randY = Math.random() * dimY
 
-    console.log(Asteroids.MovingObject.MAX_1D_VEL)
     var max = Asteroids.MovingObject.MAX_1D_VEL
     var min = -Asteroids.MovingObject.MAX_1D_VEL
     var dx = Math.random() * (max - min) + min
