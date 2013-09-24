@@ -8,7 +8,7 @@
     this.color = color;
   };
 
-  MovingObject.MAX_1D_VEL = 1
+  MovingObject.MAX_1D_VEL = .5
 
   MovingObject.prototype.move = function () {
     this.pos[0] += this.vel[0]
