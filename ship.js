@@ -5,7 +5,7 @@
     Asteroids.MovingObject.call(this, pos, vel, Ship.RADIUS, Ship.COLOR);
   };
 
-  Ship.COLOR = "green";
+  Ship.COLOR = "white";
   Ship.RADIUS = 10;
 
   Ship.inherits(Asteroids.MovingObject);

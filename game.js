@@ -10,7 +10,7 @@
     this.asteroids = this.addAsteroids(10);
     this.bullets = [];
 
-    this.ship = new Asteroids.Ship([400, 250], [0, 0])
+    this.ship = new Asteroids.Ship([500, 400], [0, 0])
   };
 
   Game.prototype.bindKeyHandlers = function() {
@@ -23,8 +23,8 @@
     key('space', function(){ that.fireBullet() });
   }
 
-  Game.DIM_X = 800;
-  Game.DIM_Y = 500;
+  Game.DIM_X = 1000;
+  Game.DIM_Y = 800;
   Game.FPS = 30;
 
   Game.prototype.checkCollisions = function() {
@@ -53,6 +53,8 @@
     var that = this;
 
     this.ctx.clearRect(0, 0, Game.DIM_X, Game.DIM_Y);
+
+    that.ctx.drawImage(background, 0, 0);
 
     this.asteroids.forEach(function(asteroid){
       asteroid.draw(that.ctx);
@@ -96,15 +98,30 @@
   }
 
   Game.prototype.removeStragglers = function () {
-    var newArray = [];
+    var newAsteroidsArray = [];
 
     this.asteroids.forEach(function(asteroid) {
       if ((0 < asteroid.pos[0]) && (Game.DIM_X > asteroid.pos[0]) && (0 < asteroid.pos[1]) && (Game.DIM_Y > asteroid.pos[1])) {
-        newArray.push(asteroid);
+        newAsteroidsArray.push(asteroid);
       }
     });
 
-    this.asteroids = newArray;
+    this.asteroids = newAsteroidsArray;
+
+    var newBulletsArray = [];
+
+    this.bullets.forEach(function(bullet) {
+      if ((0 < bullet.pos[0]) && (Game.DIM_X > bullet.pos[0]) && (0 < bullet.pos[1]) && (Game.DIM_Y > bullet.pos[1])) {
+        newBulletsArray.push(bullet);
+      }
+    });
+
+    this.bullets = newBulletsArray;
+
+    if (!((0 < this.ship.pos[0]) && (Game.DIM_X > this.ship.pos[0]) && (0 < this.ship.pos[1]) && (Game.DIM_Y > this.ship.pos[1]))) {
+      this.ship.pos = [Game.DIM_X / 2, Game.DIM_Y / 2]
+      this.ship.vel = [0, 0]
+    }
   }
 
   Game.prototype.start = function () {
@@ -113,7 +130,7 @@
     this.bindKeyHandlers()
     this.intervalID = setInterval(function() {
       that.step();
-    }, 1000/this.FPS);
+    }, 10000/this.FPS);
   }
 
   Game.prototype.stop = function () {
