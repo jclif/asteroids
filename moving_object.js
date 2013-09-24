@@ -8,23 +8,24 @@
     this.color = color;
   };
 
-  MovingObject.MAX_1D_VEL = 100
+  MovingObject.MAX_1D_VEL = 2
 
-  MovingObject.prototype.move = function (vel, pos) {
-
+  MovingObject.prototype.move = function () {
+    this.pos[0] += this.vel[0]
+    this.pos[1] += this.vel[1]
   };
 
   MovingObject.prototype.draw = function (ctx) {
     ctx.fillStyle = "black";
-    ctx.beginPath();
 
+    ctx.beginPath();
     ctx.arc(
       this.pos[0],
       this.pos[1],
       this.radius,
       0,
       2 * Math.PI,
-      false
+      true
     );
 
     ctx.fill();
